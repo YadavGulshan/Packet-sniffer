@@ -1,5 +1,7 @@
 package main
 
-import "gopacket"
+import "github.com/yadavgulshan/packet-analyzer/cmd"
 
-packet := gopacket.N
+func main() {
+	cmd.Execute()
+}
