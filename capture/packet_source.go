@@ -22,6 +22,11 @@ func CreatePacketSource(opt *PacketSourceOpt) (
 	var handle *pcap.Handle
 	timeout := time.Duration(opt.Timeout) * time.Second
 	if opt.File == "" {
+		//OpenLive opens a device and returns a *Handle. It takes as arguments the name
+		//of the device ("eth0"), the maximum size to read for each packet (snaplen),
+		//whether to put the interface in promiscuous mode, and a timeout. Warning: this
+		//function supports only microsecond timestamps. For nanosecond resolution use
+		//an InactiveHandle.
 		handle, err = pcap.OpenLive(
 			opt.Device,
 			opt.SnapShotLen,
