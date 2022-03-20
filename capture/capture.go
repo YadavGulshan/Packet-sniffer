@@ -2,6 +2,7 @@ package capture
 
 import (
 	"fmt"
+	"github.com/google/gopacket"
 	"github.com/google/gopacket/pcap"
 )
 
@@ -74,6 +75,30 @@ func ListDevices() (err error) {
 		fmt.Printf("Description: %s\n", device.Description)
 		fmt.Printf("Flags: %d\n", device.Flags)
 		fmt.Printf("Address: %s\n", device.Addresses)
+	}
+	return
+}
+
+func CreatePacketCaptureSource(opt *Options) (packetSources []*gopacket.PacketSource, err error) {
+	packetSources = []*gopacket.PacketSource{}
+	for _, device := range opt.Devices {
+		pktSourceOpt := &PacketSourceOpt{
+			device,
+			opt.BPFFilter,
+			opt.Promiscous,
+			opt.SnapshotLen,
+			opt.Timeout,
+			opt.File,
+		}
+
+		packetSource, errX := CreatePacketSource(pktSourceOpt)
+
+		if errX != nil {
+			err = errX
+			return
+		}
+		packetSources = append(packetSources, packetSource)
+
 	}
 	return
 }
