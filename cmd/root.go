@@ -11,8 +11,11 @@ var rootcmd = &cobra.Command{
 	Run:   run,
 }
 
-func run(cmd *cobra.Command, arg []string) {
-	cmd.Usage()
+func run(cmd *cobra.Command, _ []string) {
+	err := cmd.Usage()
+	if err != nil {
+		return
+	}
 }
 
 func Execute() {

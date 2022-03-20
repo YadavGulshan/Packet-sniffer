@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+
 	"github.com/spf13/cobra"
 	"github.com/yadavgulshan/packet-analyzer/capture"
 )
@@ -41,6 +42,7 @@ var captureCmd = &cobra.Command{
 		if err != nil {
 			return
 		}
+		err = capture.Capture(captureOpt)
 		return
 	}}
 
