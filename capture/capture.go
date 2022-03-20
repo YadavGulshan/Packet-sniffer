@@ -9,12 +9,12 @@ type Options struct {
 	// List of devices user want's to sniff.
 	Devices []string
 	//	Berkeley packet filters
-	//BPFFilter   string
-	//Promiscous  bool
+	BPFFilter   string
+	Promiscous  bool
 	SnapshotLen int32
 	Timeout     int
-	//File        string
-	//MaxPackets int
+	File        string
+	MaxPackets  int
 }
 
 const (
