@@ -38,7 +38,7 @@ func (opt *Options) Validate() (err error) {
 	for _, device := range opt.Devices {
 		ok, errX := IsDeviceExists(device)
 		err = errX
-		if err!=nil{
+		if err != nil {
 			return
 		}
 		if !ok {
@@ -91,11 +91,11 @@ func CreatePacketCaptureSource(opt *Options) (packetSources []*gopacket.PacketSo
 	packetSources = []*gopacket.PacketSource{}
 	for _, device := range opt.Devices {
 		pktSourceOpt := &PacketSourceOpt{
-			Device:device,
-			BPFFilter:opt.BPFFilter,
-			Promiscous:opt.Promiscous,
-			SnapShotLen:opt.SnapshotLen,
-			Timeout:opt.Timeout,
+			Device:      device,
+			BPFFilter:   opt.BPFFilter,
+			Promiscous:  opt.Promiscous,
+			SnapShotLen: opt.SnapshotLen,
+			Timeout:     opt.Timeout,
 		}
 
 		packetSource, errX := CreatePacketSource(pktSourceOpt)
@@ -107,6 +107,7 @@ func CreatePacketCaptureSource(opt *Options) (packetSources []*gopacket.PacketSo
 		packetSources = append(packetSources, packetSource)
 
 	}
+
 	return
 }
 
@@ -145,8 +146,8 @@ func Capture(opt *Options) (err error) {
 			}
 		}
 	}
-	for _, packetSources := range packetSources {
-		go getPackets(packetSources)
+	for _, packetSource := range packetSources {
+		go getPackets(packetSource)
 	}
 
 	count := 1
@@ -165,5 +166,6 @@ func Capture(opt *Options) (err error) {
 			}
 		}
 	}
+
 	return
 }
