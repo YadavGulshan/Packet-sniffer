@@ -37,6 +37,11 @@ func CreatePacketSource(opt *PacketSourceOpt) (
 			timeout,
 		)
 	} else {
+		// This section won't get executed at all!
+		// why?
+		// Because I didn't specified the file object when calling this function.
+		// So by default this function will open the live mode.
+		// Then this live mode will be captured inside a file.
 		println("Trying to open file")
 		// if file is specified
 		handle, err = pcap.OpenOffline(opt.File)

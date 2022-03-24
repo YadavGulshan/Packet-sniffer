@@ -112,7 +112,7 @@ func CreatePacketCaptureSource(opt *Options) (packetSources []*gopacket.PacketSo
 
 func Capture(opt *Options) (err error) {
 	packetSources, err := CreatePacketCaptureSource(opt)
-	print("Capture")
+	println("Capture")
 	if err != nil {
 		return
 	}
